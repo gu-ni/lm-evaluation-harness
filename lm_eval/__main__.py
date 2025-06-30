@@ -480,7 +480,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         if args.log_samples:
             samples = results.pop("samples")
         dumped = json.dumps(
-            results, indent=2, default=handle_non_serializable, ensure_ascii=False
+            results, indent=4, default=handle_non_serializable, ensure_ascii=False
         )
         if args.show_config:
             print(dumped)
