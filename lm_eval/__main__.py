@@ -496,7 +496,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
                     wandb_logger.log_eval_samples(samples)
             except Exception as e:
                 eval_logger.info(f"Logging to Weights and Biases failed due to {e}")
-
+        
         evaluation_tracker.save_results_aggregated(
             results=results, samples=samples if args.log_samples else None
         )

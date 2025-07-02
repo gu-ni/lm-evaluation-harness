@@ -210,6 +210,7 @@ class EvaluationTracker:
 
                 # calculate cumulative hash for each task - only if samples are provided
                 task_hashes = {}
+                task_names = []
                 if samples:
                     for task_name, task_samples in samples.items():
                         sample_hashes = [
@@ -217,32 +218,30 @@ class EvaluationTracker:
                             for s in task_samples
                         ]
                         task_hashes[task_name] = hash_string("".join(sample_hashes))
+                        task_names.append(task_name)
+                        
+                task_name_agg = ".".join(task_names)
 
                 # update initial results dict
                 results.update({"task_hashes": task_hashes})
                 results.update(asdict(self.general_config_tracker))
                 dumped = json.dumps(
                     results,
-                    indent=2,
+                    indent=4,
                     default=handle_non_serializable,
                     ensure_ascii=False,
                 )
-
-                path = Path(self.output_path if self.output_path else Path.cwd())
-                self.date_id = datetime.now().isoformat().replace(":", "-")
-                if path.suffix == ".json":
-                    path.parent.mkdir(parents=True, exist_ok=True)
-                    file_results_aggregated = path.with_name(
-                        f"{path.stem}_{self.date_id}.json"
-                    )
-                else:
-                    path = path.joinpath(
-                        self.general_config_tracker.model_name_sanitized
-                    )
-                    path.mkdir(parents=True, exist_ok=True)
-                    file_results_aggregated = path.joinpath(
-                        f"results_{self.date_id}.json"
-                    )
+                
+                model_name = self.general_config_tracker.model_name_sanitized
+                path = Path("results")
+                path = path.joinpath(
+                    task_name_agg, model_name, "scores"
+                )
+                path.mkdir(parents=True, exist_ok=True)
+                
+                file_results_aggregated = path.joinpath(
+                    f"{self.output_path}.json"
+                )
 
                 file_results_aggregated.open("w", encoding="utf-8").write(dumped)
 
@@ -284,7 +283,7 @@ class EvaluationTracker:
     def save_results_samples(
         self,
         task_name: str,
-        samples: dict,
+        samples: dict
     ) -> None:
         """
         Saves the samples results to the output path and pushes them to the Hugging Face hub if requested.
@@ -297,17 +296,17 @@ class EvaluationTracker:
             try:
                 eval_logger.info(f"Saving per-sample results for: {task_name}")
 
-                path = Path(self.output_path if self.output_path else Path.cwd())
-                if path.suffix == ".json":
-                    path = path.parent
-                else:
-                    path = path.joinpath(
-                        self.general_config_tracker.model_name_sanitized
-                    )
+                # path = Path(self.output_path if self.output_path else Path.cwd())
+                
+                model_name = self.general_config_tracker.model_name_sanitized
+                path = Path("results")
+                path = path.joinpath(
+                    task_name, model_name, "samples"
+                )
                 path.mkdir(parents=True, exist_ok=True)
-
+                
                 file_results_samples = path.joinpath(
-                    f"samples_{task_name}_{self.date_id}.jsonl"
+                    f"{self.output_path}.jsonl"
                 )
 
                 for sample in samples:
