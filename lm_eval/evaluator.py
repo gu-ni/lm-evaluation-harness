@@ -2,6 +2,7 @@ import itertools
 import json
 import logging
 import random
+import re
 import time
 from collections import defaultdict
 from typing import TYPE_CHECKING, Callable, List, Optional, Union
@@ -79,6 +80,7 @@ def simple_evaluate(
     description_override: Optional[str] = None,
     gen_prefix_override: Optional[str] = None,
     chat_template_fn: Optional[Callable] = None,
+    answer_regex_override: Optional[str] = None,
 ):
     """Instantiate and evaluate a model on a list of tasks.
 
@@ -149,6 +151,8 @@ def simple_evaluate(
         Optional generation prefix to apply to all tasks.
     :param chat_template_fn: Callable
         Custom chat template function to override the model's implementation.
+    :param answer_regex_override: str
+        Optional regex used to extract the final answer from model outputs.
 
     return
         Dictionary of results
@@ -334,6 +338,28 @@ def simple_evaluate(
                     task_obj.set_config(key="description", value=description_override)
                 if gen_prefix_override is not None:
                     task_obj.set_config(key="gen_prefix", value=gen_prefix_override)
+                if (
+                    answer_regex_override is not None
+                    and task_obj.get_config("output_type") == "generate_until"
+                ):
+                    original_process_results = task_obj.process_results
+                    regex = re.compile(answer_regex_override)
+
+                    def wrapped_process(
+                        doc, results, _regex=regex, _orig=original_process_results
+                    ):
+                        processed = []
+                        for r in results:
+                            match = _regex.search(r)
+                            if match:
+                                processed.append(
+                                    match.group(1) if match.groups() else match.group(0)
+                                )
+                            else:
+                                processed.append(r)
+                        return _orig(doc, processed)
+
+                    task_obj.process_results = wrapped_process
 
                 adjusted_task_dict[task_name] = task_obj
 
@@ -375,6 +401,7 @@ def simple_evaluate(
         verbosity=verbosity,
         confirm_run_unsafe_code=confirm_run_unsafe_code,
         chat_template_fn=chat_template_fn,
+        answer_regex_override=answer_regex_override,
     )
     if verbosity is not None:
         setup_logging(verbosity=verbosity)
@@ -439,6 +466,7 @@ def evaluate(
     verbosity: str = "INFO",
     confirm_run_unsafe_code: bool = False,
     chat_template_fn: Optional[Callable] = None,
+    answer_regex_override: Optional[str] = None,
 ):
     """Instantiate and evaluate a model on a list of tasks.
 
@@ -475,6 +503,8 @@ def evaluate(
         Whether to confirm running tasks marked as unsafe.
     :param chat_template_fn: Callable
         Optional chat template function to apply instead of the model's default.
+    :param answer_regex_override: str
+        Optional regex used to extract the final answer from model outputs.
     :return
         Dictionary of results
     """

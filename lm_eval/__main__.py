@@ -361,10 +361,12 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         args.chat_template_fn = prompt_cfg.get("chat_template")
         args.gen_prefix_override = prompt_cfg.get("gen_prefix")
         args.description_override = prompt_cfg.get("description")
+        args.answer_regex_override = prompt_cfg.get("answer_regex")
     else:
         args.chat_template_fn = None
         args.gen_prefix_override = None
         args.description_override = None
+        args.answer_regex_override = None
 
     if args.include_path is not None:
         eval_logger.info(f"Including path: {args.include_path}")
@@ -499,6 +501,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         description_override=args.description_override,
         gen_prefix_override=args.gen_prefix_override,
         chat_template_fn=args.chat_template_fn,
+        answer_regex_override=args.answer_regex_override,
         **request_caching_args,
     )
 
