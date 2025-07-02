@@ -21,7 +21,7 @@ for model_name in "${models[@]}"; do
         --output_path base
 done
 
-for ((i=1; i<=100000; i++)); do
-    echo "$i"
-    python /home/work/users/PIL_ghj/LLM/code/generate_qa_datasets_copy.py
-done
+# for ((i=1; i<=100000; i++)); do
+#     echo "$i"
+#     python /home/work/users/PIL_ghj/LLM/code/generate_qa_datasets_copy.py
+# done
