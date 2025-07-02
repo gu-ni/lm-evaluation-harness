@@ -57,6 +57,7 @@ MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
         "apply_chat_template": True,
         "chat_template": qwen_chat_template,
         "gen_prefix": "",
+        "answer_regex": r"\\boxed\{([^}]*)\}",
     },
     "Qwen/Qwen2-Math-7B-Instruct": {
         "description": qwen2_math_description,
@@ -64,6 +65,7 @@ MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
         "apply_chat_template": True,
         "chat_template": qwen_chat_template,
         "gen_prefix": "",
+        "answer_regex": r"\\boxed\{([^}]*)\}",
     },
     "deepseek-math-7b-instruct": {
         "description": deepseek_math_description,
@@ -71,6 +73,7 @@ MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
         "apply_chat_template": True,
         "chat_template": default_chat_template,
         "gen_prefix": "",
+        "answer_regex": r"\\boxed\{([^}]*)\}",
     },
     "google/gemma-2-9b-it": {
         "description": gemma_9b_description,
@@ -78,6 +81,7 @@ MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
         "apply_chat_template": True,
         "chat_template": gemma_chat_template,
         "gen_prefix": "<bos>",
+        "answer_regex": r"\\boxed\{([^}]*)\}",
     },
     "google/gemma-2-27b-it": {
         "description": gemma_27b_description,
@@ -85,6 +89,7 @@ MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
         "apply_chat_template": True,
         "chat_template": gemma_chat_template,
         "gen_prefix": "<bos>",
+        "answer_regex": r"\\boxed\{([^}]*)\}",
     },
     "nvidia/AceReason-Nemotron-1.1-7B": {
         "description": gemma_27b_description,
