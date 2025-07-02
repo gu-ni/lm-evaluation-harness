@@ -86,6 +86,13 @@ MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
         "chat_template": gemma_chat_template,
         "gen_prefix": "<bos>",
     },
+    "nvidia/AceReason-Nemotron-1.1-7B": {
+        "description": gemma_27b_description,
+        "system_instruction": gemma_27b_description,
+        "apply_chat_template": True,
+        "chat_template": gemma_chat_template,
+        "gen_prefix": "<bos>",
+    }
 }
 
 
