@@ -16,6 +16,7 @@ from lm_eval.utils import (
     make_table,
     simple_parse_args_string,
 )
+from lm_eval.models.prompt_defaults import get_prompt_config
 
 
 def try_parse_json(value: str) -> Union[str, dict, None]:
@@ -343,6 +344,30 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
             "When `fewshot_as_multiturn` is selected, `apply_chat_template` must be set (either to `True` or to the chosen template name)."
         )
 
+    model_args_dict = (
+        simple_parse_args_string(args.model_args)
+        if isinstance(args.model_args, str)
+        else args.model_args
+        if isinstance(args.model_args, dict)
+        else {}
+    )
+    pretrained_name = str(model_args_dict.get("pretrained", ""))
+    prompt_cfg = get_prompt_config(pretrained_name)
+    if prompt_cfg:
+        if args.system_instruction is None:
+            args.system_instruction = prompt_cfg.get("system_instruction")
+        if args.apply_chat_template is False:
+            args.apply_chat_template = prompt_cfg.get("apply_chat_template", False)
+        args.chat_template_fn = prompt_cfg.get("chat_template")
+        args.gen_prefix_override = prompt_cfg.get("gen_prefix")
+        args.description_override = prompt_cfg.get("description")
+        args.answer_regex_override = prompt_cfg.get("answer_regex")
+    else:
+        args.chat_template_fn = None
+        args.gen_prefix_override = None
+        args.description_override = None
+        args.answer_regex_override = None
+
     if args.include_path is not None:
         eval_logger.info(f"Including path: {args.include_path}")
     metadata = (
@@ -473,6 +498,10 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         fewshot_random_seed=args.seed[3],
         confirm_run_unsafe_code=args.confirm_run_unsafe_code,
         metadata=metadata,
+        description_override=args.description_override,
+        gen_prefix_override=args.gen_prefix_override,
+        chat_template_fn=args.chat_template_fn,
+        answer_regex_override=args.answer_regex_override,
         **request_caching_args,
     )
 
@@ -496,7 +525,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
                     wandb_logger.log_eval_samples(samples)
             except Exception as e:
                 eval_logger.info(f"Logging to Weights and Biases failed due to {e}")
-        
+
         evaluation_tracker.save_results_aggregated(
             results=results, samples=samples if args.log_samples else None
         )
