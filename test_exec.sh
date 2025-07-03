@@ -1,13 +1,13 @@
 models=(
     # "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    "Qwen/Qwen2.5-Math-7B-Instruct"
-    "Qwen/Qwen2-Math-7B-Instruct"
-    "deepseek-math-7b-instruct"
-    "MathGenie/MathCoder2-Llama-3-8B"
-    "google/gemma-2-9b-it"
-    "google/gemma-2-27b-it"
+    # "Qwen/Qwen2.5-Math-7B-Instruct"
+    # "Qwen/Qwen2-Math-7B-Instruct"
+    # "deepseek-math-7b-instruct"
+    # "MathGenie/MathCoder2-Llama-3-8B"
+    # "google/gemma-2-9b-it"
+    # "google/gemma-2-27b-it"
     "nvidia/AceReason-Nemotron-1.1-7B"
-    "mistralai/Mistral-Small-24B-Instruct-2501"
+    # "mistralai/Mistral-Small-24B-Instruct-2501"
 )
 
 for model_name in "${models[@]}"; do

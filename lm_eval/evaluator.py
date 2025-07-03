@@ -378,7 +378,7 @@ def simple_evaluate(
             chat_template=(
                 lm.chat_template(apply_chat_template)
                 if chat_template_fn is None
-                else chat_template_fn
+                else chat_template_fn(apply_chat_template)
             )
             if apply_chat_template
             else None,
