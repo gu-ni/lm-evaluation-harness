@@ -63,7 +63,7 @@ def nvidia_chat_template(
             chat += f"<|im_start|>{m['role']}\n{m['content']}\n\n"
     chat += math_instruction
     if add_generation_prompt:
-        chat += "<|im_start|>assistant\n<think>\n"
+        chat += "\n<|im_start|>assistant\n<think>\n"
     return chat
     
 

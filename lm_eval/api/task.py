@@ -21,6 +21,7 @@ from typing import (
 )
 
 import datasets
+from datasets import load_from_disk
 import numpy as np
 from tqdm import tqdm
 
@@ -989,6 +990,8 @@ class ConfigurableTask(Task):
             self.dataset = self.config.custom_dataset(
                 **(self.config.metadata or {}), **(self.config.dataset_kwargs or {})
             )
+        elif dataset_kwargs and "path" in dataset_kwargs:
+            self.dataset = datasets.load_dataset(**dataset_kwargs)
         else:
             self.dataset = datasets.load_dataset(
                 path=self.DATASET_PATH,

@@ -1,20 +1,20 @@
-models=(
-    # "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    # "Qwen/Qwen2.5-Math-7B-Instruct"
-    # "Qwen/Qwen2-Math-7B-Instruct"
-    # "deepseek-math-7b-instruct"
-    # "MathGenie/MathCoder2-Llama-3-8B"
-    # "google/gemma-2-9b-it"
-    # "google/gemma-2-27b-it"
-    "nvidia/AceReason-Nemotron-1.1-7B"
-    # "mistralai/Mistral-Small-24B-Instruct-2501"
+model_args_list=(
+    # "pretrained=meta-llama/Meta-Llama-3.1-8B-Instruct"
+    # "pretrained=Qwen/Qwen2.5-Math-7B-Instruct"
+    # "pretrained=Qwen/Qwen2-Math-7B-Instruct"
+    # "pretrained=deepseek-math-7b-instruct"
+    # "pretrained=MathGenie/MathCoder2-Llama-3-8B"
+    # "pretrained=google/gemma-2-9b-it"
+    # "pretrained=google/gemma-2-27b-it"
+    "pretrained=nvidia/AceReason-Nemotron-1.1-7B,max_gen_toks=20000"
+    # "pretrained=mistralai/Mistral-Small-24B-Instruct-2501"
 )
 
-for model_name in "${models[@]}"; do
-    echo "===> Evaluating $model_name"
+for model_args in "${model_args_list[@]}"; do
+    echo "===> Evaluating $model_args"
     lm_eval --model vllm \
-        --model_args pretrained=$model_name \
-        --tasks gsm8k \
+        --model_args $model_args \
+        --tasks gsm8k_custom \
         --device cuda:0 \
         --batch_size auto \
         --log_samples \

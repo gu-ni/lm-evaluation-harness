@@ -67,9 +67,17 @@ def setup_logging(verbosity=logging.INFO):
         logging.getLogger().setLevel(log_level)
 
 
-def hash_string(string: str) -> str:
-    return hashlib.sha256(string.encode("utf-8")).hexdigest()
+# def hash_string(string: str) -> str:
+#     return hashlib.sha256(string.encode("utf-8")).hexdigest()
 
+def hash_string(string: str | Callable) -> str:
+    """Hash a string or callable deterministically."""
+    if callable(string):
+        try:
+            string = inspect.getsource(string)
+        except (OSError, TypeError):
+            string = repr(string)
+    return hashlib.sha256(str(string).encode("utf-8")).hexdigest()
 
 def escaped_split(text, sep_char, maxsplit=-1):
     """Split text into a list on occurrences of the given separation
