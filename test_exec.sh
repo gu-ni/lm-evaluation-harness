@@ -1,12 +1,12 @@
 model_args_list=(
     # "pretrained=meta-llama/Meta-Llama-3.1-8B-Instruct"
-    # "pretrained=Qwen/Qwen2.5-Math-7B-Instruct"
+    "pretrained=Qwen/Qwen2.5-Math-7B-Instruct"
     # "pretrained=Qwen/Qwen2-Math-7B-Instruct"
     # "pretrained=deepseek-math-7b-instruct"
     # "pretrained=MathGenie/MathCoder2-Llama-3-8B"
     # "pretrained=google/gemma-2-9b-it"
     # "pretrained=google/gemma-2-27b-it"
-    "pretrained=nvidia/AceReason-Nemotron-1.1-7B,max_gen_toks=20000"
+    # "pretrained=nvidia/AceReason-Nemotron-1.1-7B,max_gen_toks=20000"
     # "pretrained=mistralai/Mistral-Small-24B-Instruct-2501"
 )
 

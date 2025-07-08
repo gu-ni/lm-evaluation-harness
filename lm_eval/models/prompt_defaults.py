@@ -27,6 +27,13 @@ gemma_27b_description = """You are a helpful assistant."""
 
 nvidia_description = """You are a helpful and harmless assistant. You should think step-by-step."""
 
+llama_description = """In the final line of your response, you must write the answer as a number, with a space after ####. For example:
+Question: ...
+Answer: ...
+So the answer is x.
+#### x
+"""
+
 # Chat template examples (can be replaced with model specific ones)
 def qwen_chat_template(
     messages: List[Dict[str, str]], add_generation_prompt: bool = True
@@ -68,11 +75,19 @@ def nvidia_chat_template(
     
 
 MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
+    "meta-llama/Meta-Llama-3.1-8B-Instruct": {
+        "description": llama_description,
+        "system_instruction": None,
+        "apply_chat_template": False,
+        "chat_template": None,
+        "gen_prefix": "",
+        "answer_regex": r"####\s*(.+)",
+    },
     "Qwen/Qwen2.5-Math-7B-Instruct": {
         "description": None,
-        "system_instruction": qwen25_math_description,
-        "apply_chat_template": True,
-        "chat_template": qwen_chat_template,
+        "system_instruction": "Please reason step by step, and put your final answer within \\boxed{} without surrounding parentheses.",
+        "apply_chat_template": False,
+        "chat_template": None,
         "gen_prefix": "",
         "answer_regex": r"\\boxed\{([^}]*)\}",
     },
