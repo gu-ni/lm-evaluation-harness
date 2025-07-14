@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Thomas has 25 drawings to display. 14 of the drawings were made using colored pencils. 7 of the drawings were made using blending markers. The rest of the drawings were made with charcoal. How many are charcoal drawings?",
+    "answer": "Thomas made 14 + 7 = <<14+7=21>>21 colored pencil and blending marker drawings.\nThomas made 25 total drawings – 21 colored pencil and blending marker drawings = <<25-21=4>>4 charcoal drawings.\n#### 4"
+  },
+  {
+    "question": "Jermaine, Terrence, and Emilee earn a total of $90. Jermaine earns $5 more than Terrence in a month. If Terrence earns $30, how much does Emilee earn?",
+    "answer": "If Terrence earns 30 dollars, then Jermaine earns $30 + $5 = $<<30+5=35>>35 dollars.\nThe total earnings of the two are $30 + $35 = $<<30+35=65>>65 dollars.\nEmilee earns $90 - $65 = $<<90-65=25>>25 dollars.\n#### 25"
+  },
+  {
+    "question": "We harvested 405 kg of apples. 90 kg were used to make fruit juice and 60 kg were given to a restaurant. The rest was sold in 5 kg bags and their sale brought in $408. What was the selling price of one bag of apples?",
+    "answer": "The weight of apples used for juice and given to the restaurant is 60 + 90 = <<60+90=150>>150 kg\nThus 405 – 150 = 255kg worth of apples were sold in 5 kg bags.\nThere were 255 / 5 = <<255/5=51>>51 bags sold.\nSo each bag was sold for 408 / 51 = $<<408/51=8>>8\n#### 8"
+  },
+  {
+    "question": "Sarah interviewed 450 students at her school and asked them which fruit they liked best - oranges, apples, pears or strawberries. 70 students said they liked oranges, 120 students said they liked pears, and 147 students said they liked apples. How many students picked strawberries as their favorite fruit from the list?",
+    "answer": "First, you have to add the number of students that liked the three other fruits. Therefore, you have to add 70 + 120 + 147. This gives you a sum of 337.\nWe know that 450 students were interviewed, so you have to subtract 337 from 450 to get the number of students who liked strawberries. 450 - 337 = <<450-337=113>>113 students liked strawberries best out of all of the fruits.\n#### 113"
+  },
+  {
+    "question": "Jack bought 3 books a month at $20 each.  He sells them back at the end of the year for $500.  How much money did he lose?",
+    "answer": "He bought 3*20=$<<3*20=60>>60 of books a month\nThat means he bought 60*12=$<<60*12=720>>720 of books a year\nSo he lost 720-500=$<<720-500=220>>220\n#### 220"
+  },
+  {
+    "question": "Perry made a recipe that serves four people. He added a half cup of cream at the end. Cream has 88 grams of fat per cup. How many grams of fat were added to each serving of food?",
+    "answer": "Perry added 88 / 2 = <<88/2=44>>44 grams of fat to the recipe.\nThus, he added 44 / 4 = <<44/4=11>>11 grams of fat to each serving of food.\n#### 11"
+  },
+  {
+    "question": "Hayden eats 1 oz of mixed nuts as an evening snack.  He buys the bulk bag of mixed nuts that cost $25.00 a bag and holds 40 oz of mixed nuts.  There is currently a $5.00 coupon for this item.  How much will each serving of nuts cost, in cents, after the coupon is applied?",
+    "answer": "The nuts are $25.00 and he has a $5.00 coupon, so the nuts are on sale for $25-$5 = $<<25-5=20.00>>20.00\nHe eats 1 oz of nuts every evening and the bag has 40 oz of nuts, so it has 40/1 = <<40/1=40>>40 1 oz servings\nThe nuts cost $20.00 and there are 40 servings per bag, so his snack is $20/40 = $<<20/40=0.50>>0.50 per serving\n#### 50"
+  },
+  {
+    "question": "Trevor buys several bouquets of carnations. The first included 9 carnations; the second included 14 carnations; the third included 13 carnations. What is the average number of carnations in the bouquets?",
+    "answer": "The sum is 9+14+13=<<9+14+13=36>>36.\nThere are 3 bouquets.\nThe average is 36/3=<<36/3=12>>12.\n#### 12"
+  },
+  {
+    "question": "Angie bought 3 lbs. of coffee at the store today. Each lb. of coffee will brew about 40 cups of coffee. Angie drinks 3 cups of coffee every day. How many days will this coffee last her?",
+    "answer": "A pound of coffee makes 40 cups of coffee, so 3 lbs. coffee * 40 cups of coffee per lb. = <<3*40=120>>120 cups of coffee.\nAngie drinks 3 cups of coffee a day, so she has enough coffee to last her 120 cups of coffee / 3 cups of coffee per day = <<120/3=40>>40 days\n#### 40"
+  },
+  {
+    "question": "On a particular week, Fatima's restaurant served 25 people food and drinks, and 3/5 of that number came to buy coffee. How many people did not buy coffee in the restaurant?",
+    "answer": "The number of customers who were served coffee in the restaurant is 3/5*25 = <<3/5*25=15>>15\nIf the total number of customers who came to the restaurant was 25, then 25-15 = <<25-15=10>>10 customers did not buy coffee\n#### 10"
+  }
+]

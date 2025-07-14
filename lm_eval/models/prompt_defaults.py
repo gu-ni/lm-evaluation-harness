@@ -27,12 +27,13 @@ gemma_27b_description = """You are a helpful assistant."""
 
 nvidia_description = """You are a helpful and harmless assistant. You should think step-by-step."""
 
-llama_description = """In the final line of your response, you must write the answer as a number, with a space after ####. For example:
-Question: ...
+default_description = """In the final line of your response, you must write the answer as a number, with a space after '####'. For example:
+Question: ...?
 Answer: ...
 So the answer is x.
-#### x
-"""
+#### x"""
+
+default_system_instruction = """You are a helpful assistant specialized in solving math problems."""
 
 # Chat template examples (can be replaced with model specific ones)
 def qwen_chat_template(
@@ -76,60 +77,60 @@ def nvidia_chat_template(
 
 MODEL_PROMPT_CONFIGS: Dict[str, Dict[str, object]] = {
     "meta-llama/Meta-Llama-3.1-8B-Instruct": {
-        "description": llama_description,
-        "system_instruction": None,
-        "apply_chat_template": False,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
+        "apply_chat_template": True,
         "chat_template": None,
         "gen_prefix": "",
         "answer_regex": r"####\s*(.+)",
     },
     "Qwen/Qwen2.5-Math-7B-Instruct": {
-        "description": None,
-        "system_instruction": "Please reason step by step, and put your final answer within \\boxed{} without surrounding parentheses.",
-        "apply_chat_template": False,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
+        "apply_chat_template": True,
         "chat_template": None,
         "gen_prefix": "",
-        "answer_regex": r"\\boxed\{([^}]*)\}",
+        "answer_regex": r"####\s*(.+)",
     },
     "Qwen/Qwen2-Math-7B-Instruct": {
-        "description": None,
-        "system_instruction": qwen2_math_description,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
         "apply_chat_template": True,
-        "chat_template": qwen_chat_template,
+        "chat_template": None,
         "gen_prefix": "",
-        "answer_regex": r"\\boxed\{([^}]*)\}",
+        "answer_regex": r"####\s*(.+)",
     },
     "deepseek-math-7b-instruct": {
-        "description": None,
-        "system_instruction": deepseek_math_description,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
         "apply_chat_template": True,
-        "chat_template": default_chat_template,
+        "chat_template": None,
         "gen_prefix": "",
-        "answer_regex": r"\\boxed\{([^}]*)\}",
+        "answer_regex": r"####\s*(.+)",
     },
     "google/gemma-2-9b-it": {
-        "description": None,
-        "system_instruction": gemma_9b_description,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
         "apply_chat_template": True,
-        "chat_template": gemma_chat_template,
+        "chat_template": None,
         "gen_prefix": "<bos>",
-        "answer_regex": r"\\boxed\{([^}]*)\}",
+        "answer_regex": r"####\s*(.+)",
     },
     "google/gemma-2-27b-it": {
-        "description": None,
-        "system_instruction": gemma_27b_description,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
         "apply_chat_template": True,
-        "chat_template": gemma_chat_template,
+        "chat_template": None,
         "gen_prefix": "<bos>",
-        "answer_regex": r"\\boxed\{([^}]*)\}",
+        "answer_regex": r"####\s*(.+)",
     },
     "nvidia/AceReason-Nemotron-1.1-7B": {
-        "description": None,
-        "system_instruction": nvidia_description,
+        "description": default_description,
+        "system_instruction": default_system_instruction,
         "apply_chat_template": True,
-        "chat_template": nvidia_chat_template,
+        "chat_template": None,
         "gen_prefix": None,
-        "answer_regex": r"\\boxed\{([^}]*)\}",
+        "answer_regex": r"####\s*(.+)",
     }
 }
 

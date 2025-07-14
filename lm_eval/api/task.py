@@ -1120,33 +1120,28 @@ class ConfigurableTask(Task):
         :returns: str
             The fewshot context.
         """
+        
         if apply_chat_template:
             labeled_examples = []
         else:
             labeled_examples = ""
 
-        # get task description
-        if description := self.config.description:
+        # 1. description 생성
+        description = None
+        if self.config.description:
             description = utils.apply_template(self.config.description, doc)
 
-        # create system prompt based on the provided system instruction and description
-        if system_instruction is not None and description:
-            system_prompt = (
-                f"{system_instruction}{self.sampler.fewshot_delimiter}{description}"
-            )
-        elif system_instruction is not None:
-            system_prompt = system_instruction
-        elif description:
-            system_prompt = description
+        # 2. system_prompt 구성
+        if apply_chat_template:
+            if system_instruction:
+                labeled_examples.append({"role": "system", "content": system_instruction})
+            # description은 assistant로 설정하거나 제거 가능
+            # labeled_examples.append({"role": "assistant", "content": description})
         else:
-            system_prompt = ""
-
-        # add system prompt if specified
-        if system_prompt:
-            if apply_chat_template:
-                labeled_examples.append({"role": "system", "content": system_prompt})
-            else:
-                labeled_examples = system_prompt
+            if system_instruction:
+                labeled_examples = f"{system_instruction} "
+        
+        # 3. few-shot 예시 추가
         # if few-shot - append examples after the system prompt
         if num_fewshot > 0:
             if apply_chat_template:
@@ -1162,18 +1157,24 @@ class ConfigurableTask(Task):
                 labeled_examples += self.sampler.get_context(
                     doc, num_fewshot, gen_prefix=gen_prefix
                 )
-
+        
+        # 4. 질문 본문 (example) 생성
         example = self.doc_to_text(doc)
+        desc = description + "\n" if description else ""
+        
         if apply_chat_template:
             if self.multiple_input:
                 # TODO: append prefill?
                 if not labeled_examples:
                     return ""
                 return chat_template(labeled_examples)
+            
             if isinstance(example, str):
+                # ✅ 여기서 지시문을 질문 앞에 붙인 후 append_target_question에 전달
+                full_question = desc + example
                 self.append_target_question(
                     labeled_examples,
-                    example,
+                    full_question,
                     fewshot_as_multiturn,
                     gen_prefix=gen_prefix,
                 )
@@ -1183,9 +1184,10 @@ class ConfigurableTask(Task):
                 # copy chat history for each example and append the answer
                 for ex in example:
                     chat = deepcopy(labeled_examples)
+                    full_question = desc + ex
                     self.append_target_question(
                         chat,
-                        ex,
+                        full_question,
                         fewshot_as_multiturn,
                         gen_prefix=gen_prefix,
                     )
@@ -1201,19 +1203,16 @@ class ConfigurableTask(Task):
             elif isinstance(example, int):
                 if self.config.doc_to_choice is not None:
                     choices = self.doc_to_choice(doc)
-                    self.append_target_question(
-                        labeled_examples,
-                        choices[example],
-                        fewshot_as_multiturn,
-                        gen_prefix=gen_prefix,
-                    )
+                    full_question = desc + choices[example]
                 else:
-                    self.append_target_question(
-                        labeled_examples,
-                        str(example),
-                        fewshot_as_multiturn,
-                        gen_prefix=gen_prefix,
-                    )
+                    full_question = desc + str(example)
+                
+                self.append_target_question(
+                    labeled_examples,
+                    full_question,
+                    fewshot_as_multiturn,
+                    gen_prefix=gen_prefix,
+                )
                 # return lm.apply_chat_template(labeled_examples)
             return chat_template(
                 labeled_examples,
@@ -1228,15 +1227,15 @@ class ConfigurableTask(Task):
             if self.multiple_input:
                 return labeled_examples
             if isinstance(example, str):
-                return labeled_examples + example + prefix
+                return labeled_examples + desc + example + prefix
             elif isinstance(example, list):
-                return [labeled_examples + ex + prefix for ex in example]
+                return [labeled_examples + desc + ex + prefix for ex in example]
             elif isinstance(example, int):
                 if self.config.doc_to_choice is not None:
                     choices = self.doc_to_choice(doc)
-                    return labeled_examples + choices[example] + prefix
+                    return labeled_examples + desc + choices[example] + prefix
                 else:
-                    return labeled_examples + str(example) + prefix
+                    return labeled_examples + desc + str(example) + prefix
 
     def apply_filters(self) -> Optional[List[Instance]]:
         """Iterates over FilterEnsembles and applies them to instances"""

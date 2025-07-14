@@ -1,12 +1,11 @@
 tag:
   - math_word_problems
-task: gsm8k_custom
-# dataset_path: /home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_100
+task: aime
 dataset_kwargs:
   path: json
   data_files: {
-    "train": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_120.json",
-    "test": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_120_test.json"
+    "train": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/AIME/aime_test.json",
+    "test": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/AIME/aime_test.json"
   }
 test_split: test
 output_type: generate_until

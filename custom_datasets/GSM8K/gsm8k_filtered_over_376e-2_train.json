@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Mona plays a multiplayer video game on the weekends. She joins groups with four other players to complete objectives in the game. The past weekend, she joined 9 groups. One of the groups included two players she had grouped with before that weekend, and another group included one person she had grouped with before. How many unique players did Mona group with on the video game that weekend?",
+    "answer": "Mona joined 9 groups, so she played with 9 * 4 = <<9*4=36>>36 people.\nShe grouped with 2 + 1 = <<2+1=3>>3 people twice.\nThus, she played with 36 - 3 = <<36-3=33>>33 unique players that weekend.\n#### 33"
+  },
+  {
+    "question": "To make a shed in his backyard, Tom needs 1000 bricks. He can buy half of the bricks for 50% off of $.50. The other Half he needs to pay full price. How many dollars does Tom spend?",
+    "answer": "Tom can buy 1000/2=<<1000/2=500>>500 for half price.\nHe will spend $.50/2= $<<.50/2=.25>>.25 on the half-priced bricks.\nThus, he will spend 500*$.25=$<<500*.25=125>>125 on the half-priced bricks.\nHe will spend 500*$.50=$<<500*.50=250>>250 on the full-priced bricks.\nThus, he will spend $125+$250=$<<125+250=375>>375 total.\n#### 375"
+  },
+  {
+    "question": "John volunteers at a shelter twice a month for 3 hours at a time.  How many hours does he volunteer per year?",
+    "answer": "He volunteers 2*12=<<2*12=24>>24 times a year\nSo he volunteers for 24*3=<<24*3=72>>72 hours\n#### 72"
+  },
+  {
+    "question": "If Layla scored 104 goals in four hockey games and Kristin scored 24 fewer goals in the same four games, calculate the average number of goals the two scored.",
+    "answer": "If Layla scored 104 goals in four hockey games and Kristin scored 24 fewer goals in the same four games, Kristin scored 104-24 = <<104-24=80>>80 goals.\nThe combined number of goals they scored is 80+104 = <<80+104=184>>184\nThe average number of goals they scored is 184/2 = <<184/2=92>>92\n#### 92"
+  },
+  {
+    "question": "Jake is from a conservative household so during lunch at school one day, he gave one-quarter of his feeding allowance to a hungry friend. If candies cost 20 cents apiece and Jake's feeding allowance is $4, how many candies can his friend purchase with the money Jake gave to him?",
+    "answer": "One quarter of $4 is (1/4)*$4 = $<<(1/4)*4=1>>1\n$1 is equivalent to 100 cents\n20 cents will buy 1 candy so 100 cents will buy 100/20 = <<100/20=5>>5 candies\n#### 5"
+  },
+  {
+    "question": "Tony has a bucket that holds 2 pounds of sand. He has a sandbox out back that is two feet deep, four feet wide, and 5 feet long. A cubic foot of sand weighs 3 pounds. Because it's hot outside, he wants to make sure he stays hydrated, so every 4 trips he takes he drinks 3 ounces of bottled water. A 15 ounce bottle of water costs $2. He has $10 with him. How much change will he have after he buys all the water he needs?",
+    "answer": "The sandbox is 40 cubic feet because 2 x 4 x 5 = <<2*4*5=40>>40\nHe needs 120 pounds of sand because 40 x 3 = <<40*3=120>>120\nHe will take 60 trips because 120 / 2 = <<120/2=60>>60\nHe will need to drink water 15 times because 60 / 4 = <<60/4=15>>15\nHe will drink 45 ounces of water because 15 x 3 = <<15*3=45>>45\nHe will need 3 bottles of water because 45 / 15 = <<45/15=3>>3\nHe will spend $6 on water because 3 x 2 = <<3*2=6>>6\nHe will have $4 in change because 10 - 6 = <<10-6=4>>4\n#### 4"
+  },
+  {
+    "question": "Jason bought 4 dozen cupcakes. He plans to give 3 cupcakes each to his cousins. How many cousins does Jason have?",
+    "answer": "Since a dozen is equal to 12, then Jason bought 12 x 4 = <<12*4=48>>48 cupcakes.\nSo, Jason has 48/3 = <<48/3=16>>16 cousins.\n#### 16"
+  },
+  {
+    "question": "A gecko eats 70 crickets every three days.  The first day she eats 30% of the crickets.  The second day she eats 6 less than the first, and the third day she finishes up the remaining crickets.  How many crickets does she eat on the third day?",
+    "answer": "Day 1:70(.30)=21 crickets\nDay 2:21-6=<<21-6=15>>15 crickets\nDay 3:70-21-15=<<70-21-15=34>>34 crickets\n#### 34"
+  },
+  {
+    "question": "There were 200 students on a field playing football. Suddenly a military plane flew by, and 3/4 of the students looked up. How many eyes saw the airplane?",
+    "answer": "If there were 200 students on the field and 3/4 of the students looked up at the flying plane, 3/4*200 = <<3/4*200=150>>150 students saw the plane.\nSince each student has two eyes, the number of eyes that looked at the plane is 2*150 = <<2*150=300>>300 years.\n#### 300"
+  },
+  {
+    "question": "Noemi lost $400 on roulette and $500 on blackjack. How much money did Noemi begin with if she still had $800 in her purse?",
+    "answer": "The total amount of money that she lost is $400+$500 = $<<400+500=900>>900\nIf she remained with $900, she initially had $900+$800 = $<<900+800=1700>>1700\n#### 1700"
+  }
+]

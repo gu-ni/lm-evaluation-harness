@@ -5,8 +5,8 @@ task: gsm8k_custom
 dataset_kwargs:
   path: json
   data_files: {
-    "train": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_120.json",
-    "test": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_120_test.json"
+    "train": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_filtered_under_7472e-4_train.json",
+    "test": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_filtered_under_7472e-4_test.json"
   }
 test_split: test
 output_type: generate_until
@@ -37,7 +37,7 @@ filter_list:
   - name: "strict-match"
     filter:
       - function: "regex"
-        regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
+        regex_pattern: r"\\(?:\(|\[)?\\boxed\{([^}]*)\}(?:\\\)|\\\])?"
       - function: "take_first"
   - name: "flexible-extract"
     filter:

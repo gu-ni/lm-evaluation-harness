@@ -1,12 +1,12 @@
 tag:
   - math_word_problems
-task: gsm8k_custom
+task: gsm8k_custom_over_376e-2
 # dataset_path: /home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_100
 dataset_kwargs:
   path: json
   data_files: {
-    "train": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_120.json",
-    "test": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_first_120_test.json"
+    "train": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_filtered_over_376e-2_train.json",
+    "test": "/home/work/users/PIL_ghj/LLM/math/lm-evaluation-harness/custom_datasets/GSM8K/gsm8k_filtered_over_376e-2_test.json"
   }
 test_split: test
 output_type: generate_until
